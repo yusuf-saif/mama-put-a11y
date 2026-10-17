@@ -1,0 +1,57 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "login": true,
+  "steps": [
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "twentytwentyone"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "accessibility-checker"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "elementor"
+      },
+      "options": {
+        "activate": false
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Mama Put Kitchen",
+        "blogdescription": "Home-style Nigerian food, delivered"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\nwp_set_current_user(1);\n$home = <<<'HTML'\n<!-- wp:heading {\"level\":4} -->\n<h4 class=\"wp-block-heading\">Our Menu</h4>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\",\"linkDestination\":\"custom\"} -->\n<figure class=\"wp-block-image size-large\"><a href=\"#menu\"><img src=\"https://picsum.photos/id/292/3200/1800\" alt=\"\"/></a></figure>\n<!-- /wp:image -->\n\n<!-- wp:paragraph {\"style\":{\"color\":{\"text\":\"#bbbbbb\"}}} -->\n<p class=\"has-text-color\" style=\"color:#bbbbbb\">Order before 2pm for same-day delivery anywhere in Abuja.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>Want to see everything we cook this week? <a href=\"#menu\">Click here</a>.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Join our newsletter</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<form class=\"mp-newsletter\" onsubmit=\"return false\"><input type=\"email\" placeholder=\"Your email\" style=\"padding:.6em;border:1px solid #ddd;min-width:240px\"> <div class=\"mp-subscribe\" onclick=\"alert('Thanks for subscribing!')\" style=\"display:inline-block;background:#0ea5e9;color:#ffffff;padding:.6em 1.4em;cursor:pointer;border-radius:4px\">Subscribe</div></form>\n<!-- /wp:html -->\n\n<!-- wp:paragraph -->\n<p><a href=\"/catering/\">Catering for events</a></p>\n<!-- /wp:paragraph -->\n\nHTML;\n$id = wp_insert_post(['post_type'=>'page','post_title'=>'Welcome to Mama Put Kitchen','post_name'=>'home','post_status'=>'publish','post_content'=>$home]);\nupdate_option('show_on_front','page');\nupdate_option('page_on_front',$id);\n\n$data = <<<'JSON'\n[{\"id\":\"e000001\",\"elType\":\"section\",\"isInner\":false,\"settings\":{\"background_background\":\"classic\",\"background_image\":{\"url\":\"https://picsum.photos/id/1080/1400/700\",\"id\":\"\"},\"background_position\":\"center center\",\"background_size\":\"cover\",\"height\":\"min-height\",\"custom_height\":{\"unit\":\"px\",\"size\":420},\"content_position\":\"middle\"},\"elements\":[{\"id\":\"e000002\",\"elType\":\"column\",\"isInner\":false,\"settings\":{\"_column_size\":100},\"elements\":[{\"id\":\"e000003\",\"elType\":\"widget\",\"widgetType\":\"heading\",\"elements\":[],\"settings\":{\"title\":\"Catering for your next event\",\"header_size\":\"div\",\"title_color\":\"#FFFFFF\",\"typography_typography\":\"custom\",\"typography_font_size\":{\"unit\":\"px\",\"size\":52},\"typography_font_weight\":\"700\",\"align\":\"center\",\"_animation\":\"fadeInUp\"}},{\"id\":\"e000004\",\"elType\":\"widget\",\"widgetType\":\"text-editor\",\"elements\":[],\"settings\":{\"editor\":\"<p>Weddings, naming ceremonies, office lunches. We cook, deliver and serve.</p>\",\"text_color\":\"#F5F5F5\",\"align\":\"center\"}}]}]},{\"id\":\"e000005\",\"elType\":\"section\",\"isInner\":false,\"settings\":{\"padding\":{\"unit\":\"px\",\"top\":\"40\",\"right\":\"0\",\"bottom\":\"40\",\"left\":\"0\",\"isLinked\":false}},\"elements\":[{\"id\":\"e00000a\",\"elType\":\"column\",\"isInner\":false,\"settings\":{\"_column_size\":33},\"elements\":[{\"id\":\"e000014\",\"elType\":\"widget\",\"widgetType\":\"heading\",\"elements\":[],\"settings\":{\"title\":\"Small chops\",\"header_size\":\"h5\"}},{\"id\":\"e00001e\",\"elType\":\"widget\",\"widgetType\":\"text-editor\",\"elements\":[],\"settings\":{\"editor\":\"<p>Puff-puff, samosa, spring rolls and peppered gizzard for up to 300 guests.</p>\",\"text_color\":\"#B5B5B5\"}},{\"id\":\"e000028\",\"elType\":\"widget\",\"widgetType\":\"button\",\"elements\":[],\"settings\":{\"text\":\"Learn more\",\"link\":{\"url\":\"#\",\"is_external\":\"\",\"nofollow\":\"\"}}}]},{\"id\":\"e00000b\",\"elType\":\"column\",\"isInner\":false,\"settings\":{\"_column_size\":33},\"elements\":[{\"id\":\"e000015\",\"elType\":\"widget\",\"widgetType\":\"heading\",\"elements\":[],\"settings\":{\"title\":\"Party jollof\",\"header_size\":\"h2\"}},{\"id\":\"e00001f\",\"elType\":\"widget\",\"widgetType\":\"text-editor\",\"elements\":[],\"settings\":{\"editor\":\"<p>Smoky firewood jollof, fried rice and moi moi, served hot.</p>\",\"text_color\":\"#B5B5B5\"}},{\"id\":\"e000029\",\"elType\":\"widget\",\"widgetType\":\"button\",\"elements\":[],\"settings\":{\"text\":\"Learn more\",\"link\":{\"url\":\"#\",\"is_external\":\"\",\"nofollow\":\"\"}}}]},{\"id\":\"e00000c\",\"elType\":\"column\",\"isInner\":false,\"settings\":{\"_column_size\":33},\"elements\":[{\"id\":\"e000016\",\"elType\":\"widget\",\"widgetType\":\"heading\",\"elements\":[],\"settings\":{\"title\":\"Office lunch\",\"header_size\":\"h6\"}},{\"id\":\"e000020\",\"elType\":\"widget\",\"widgetType\":\"text-editor\",\"elements\":[],\"settings\":{\"editor\":\"<p>Daily lunch packs delivered to your office before 1pm.</p>\",\"text_color\":\"#B5B5B5\"}},{\"id\":\"e00002a\",\"elType\":\"widget\",\"widgetType\":\"button\",\"elements\":[],\"settings\":{\"text\":\"Learn more\",\"link\":{\"url\":\"#\",\"is_external\":\"\",\"nofollow\":\"\"}}}]}]},{\"id\":\"e000006\",\"elType\":\"section\",\"isInner\":false,\"settings\":{},\"elements\":[{\"id\":\"e000007\",\"elType\":\"column\",\"isInner\":false,\"settings\":{\"_column_size\":100},\"elements\":[{\"id\":\"e000032\",\"elType\":\"widget\",\"widgetType\":\"heading\",\"elements\":[],\"settings\":{\"title\":\"Book a tasting\",\"header_size\":\"p\",\"typography_typography\":\"custom\",\"typography_font_size\":{\"unit\":\"px\",\"size\":34},\"typography_font_weight\":\"700\"}},{\"id\":\"e000033\",\"elType\":\"widget\",\"widgetType\":\"icon\",\"elements\":[],\"settings\":{\"selected_icon\":{\"value\":\"fas fa-phone-alt\",\"library\":\"fa-solid\"},\"link\":{\"url\":\"tel:+2348000000000\",\"is_external\":\"\",\"nofollow\":\"\"},\"align\":\"left\"}},{\"id\":\"e000034\",\"elType\":\"widget\",\"widgetType\":\"icon\",\"elements\":[],\"settings\":{\"selected_icon\":{\"value\":\"fab fa-whatsapp\",\"library\":\"fa-brands\"},\"link\":{\"url\":\"https://wa.me/2348000000000\",\"is_external\":\"on\",\"nofollow\":\"\"},\"align\":\"left\"}}]}]}]\nJSON;\n$cid = wp_insert_post(['post_type'=>'page','post_title'=>'Catering','post_name'=>'catering','post_status'=>'publish','post_content'=>'']);\nupdate_post_meta($cid, '_elementor_edit_mode', 'builder');\nupdate_post_meta($cid, '_elementor_template_type', 'wp-page');\nupdate_post_meta($cid, '_elementor_version', '3.30.0');\nupdate_post_meta($cid, '_wp_page_template', 'elementor_header_footer');\nupdate_post_meta($cid, '_elementor_data', wp_slash($data));\n\n$pdir = WP_PLUGIN_DIR . '/mama-put-tweaks';\nwp_mkdir_p($pdir);\nfile_put_contents($pdir . '/mama-put-tweaks.php', \"<?php\\n/*\\nPlugin Name: Mama Put Theme Tweaks\\nDescription: \\\"Makes the site look like an app\\\" (it also blocks pinch-to-zoom).\\nVersion: 1.0\\n*/\\nadd_action('wp_head', function () {\\n  echo '<meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\\\">' . \\\"\\\\n\\\";\\n}, 99);\\n\");\nrequire_once ABSPATH . 'wp-admin/includes/plugin.php';\nactivate_plugin('mama-put-tweaks/mama-put-tweaks.php');\n\ndelete_transient('elementor_activation_redirect');\nupdate_option('elementor_onboarded', true);\nupdate_option('elementor_tracker_notice', '1');\nupdate_option('elementor_allow_tracking', 'no');\nglobal $wpdb;\nupdate_user_meta(1, $wpdb->get_blog_prefix() . 'persisted_preferences', ['core/edit-post'=>['welcomeGuide'=>false],'core'=>['welcomeGuide'=>false],'_modified'=>gmdate('c')]);\nupdate_user_meta(1, 'elementor_introduction', ['ai-get-started-announcement'=>true,'globals_introduction'=>true,'yt_link_dialog'=>true,'e-editor-one-notice'=>true]);\nwp_update_custom_css_post(\"/* Designer asked to remove the 'ugly blue outline' */\\n*:focus { outline: none !important; }\", ['stylesheet'=>'twentytwentyone']);\n"
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "elementor/elementor.php"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require_once '/wordpress/wp-load.php'; delete_transient('elementor_activation_redirect'); update_option('elementor_onboarded', true);"
+    }
+  ]
+}
